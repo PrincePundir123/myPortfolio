@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --animate-gradient: gradientFlow 15s ease infinite;
+}
+
+@layer base {
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-slate-900 transition-colors duration-300 bg-white;
+  }
+  html.dark body {
+    @apply text-white bg-[#0a0a0a];
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  }
+  
+  .dark .bg-grid {
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  }
+
+  .animate-slow-spin {
+    animation: spin 8s linear infinite;
+  }
+  
+  .animate-reverse-slow-spin {
+    animation: reverse-spin 12s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes reverse-spin {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+}
